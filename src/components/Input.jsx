@@ -1,31 +1,28 @@
 import React, { useContext, useState } from "react";
-
+import { MainContext } from "../MainContext";
 
 
 
 const Input = () => {
 
-
+  const [data,setData] = useState("")
+  const {addChat} = useContext(MainContext)
  
   return (
     <div className="input">
       <input
         type="text"
         placeholder="Type something..."
-
+        onChange={e => setData(e.currentTarget.value) }
+        value={data}
       />
       <div className="send">
-        <img  alt="" />
-        <input
-          type="file"
-          style={{ display: "none" }}
-          id="file"
-         
-        />
-        <label htmlFor="file">
-          <img alt="" />
-        </label>
-        <button >Send</button>
+        
+        
+        <button onClick={() => {
+          addChat(data)
+          setData("")
+        }}>Send</button>
       </div>
     </div>
   );

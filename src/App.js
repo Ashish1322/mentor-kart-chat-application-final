@@ -10,12 +10,14 @@ import { useState } from "react";
 // firebase import
 import {auth,db} from "./firebase"
 import {createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,updateProfile} from "firebase/auth"
-import {ref,child,set, get, query, orderByChild, equalTo, update} from "firebase/database"
+import {ref,child,set, get, query, orderByChild, equalTo, update, push} from "firebase/database"
 
 function App() {
 
   // states
   const [user,setUser] = useState(null)
+  const [chatUser,setChatUser] = useState(null)
+
   const [loading,setLoading] = useState(false)
  
   // 0 - Login
@@ -136,10 +138,25 @@ function App() {
     })
   }
 
+  const addChat = (message) => {
+    const messageRef = push(ref(db,"chats"))
+    const content = {
+      message: message,
+      messageId: user.uid > chatUser.uid ? user.uid + chatUser.uid : user.uid + chatUser.uid
+
+    }
+    set(messageRef,content)
+    .then(()=>{
+      console.log("done")
+    })
+    .catch(err => alert(err.message))
+  }
+
   return (
     
    <div>
-    <MainContext.Provider value={{user,login,signup,logout,setShowScreen,loading,addFriend,setUser}}>
+    <MainContext.Provider value={{user,login,signup,logout,setShowScreen,loading,addFriend,
+      setUser,chatUser,setChatUser, addChat}}>
       {
         showComponent()
       }

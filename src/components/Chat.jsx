@@ -1,13 +1,16 @@
 import React, { useContext } from "react";
 import Messages from "./Messages"
 import Input from "./Input";
+import { MainContext } from "../MainContext";
+
 const Chat = () => {
-  
+
+  const {chatUser}  = useContext(MainContext)
 
   return (
     <div className="chat">
       <div className="chatInfo">
-        <span>Ashish</span>
+        <span>{ chatUser && chatUser.name}</span>
         <div className="chatIcons">
          
         </div>

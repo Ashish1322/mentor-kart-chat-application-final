@@ -5,7 +5,7 @@ import { MainContext } from "../MainContext";
 const Chats = () => {
 
 
-  const {user} = useContext(MainContext)
+  const {user,setChatUser} = useContext(MainContext)
   console.log(JSON.parse(user.friends))
 
 
@@ -13,10 +13,12 @@ const Chats = () => {
     <div className="chats">
 
     {
-      JSON.parse(user.friends).map(friend => 
+      JSON.parse(user.friends).map(
+        friend => 
         <div
         className="userChat"
         key={friend.uid}
+        onClick= {() => setChatUser(friend)}
         
       >
         <img src="https://png.pngtree.com/png-vector/20190909/ourmid/pngtree-outline-user-icon-png-image_1727916.jpg" alt="" />
