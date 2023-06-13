@@ -2,15 +2,14 @@
 import React, { useContext, useEffect, useState } from "react";
 import Message from "./Message"
 
-const Messages = () => {
-  const [messages, setMessages] = useState([{message:"hi"},{message:"hi"},{message:"hi"}]);
+const Messages = ({messages}) => {
 
 
 
   return (
     <div className="messages">
-      {messages.map((m) => (
-        <Message message={m} key={m.id} />
+      {messages.map((m,index) => (
+        <Message message={m.message} key={index} senderId = {m.senderId} />
       ))}
     </div>
   );

@@ -142,7 +142,8 @@ function App() {
     const messageRef = push(ref(db,"chats"))
     const content = {
       message: message,
-      messageId: user.uid > chatUser.uid ? user.uid + chatUser.uid : user.uid + chatUser.uid
+      messageId: user.uid > chatUser.uid ? user.uid + chatUser.uid :  chatUser.uid+ user.uid ,
+      senderId: user.uid
 
     }
     set(messageRef,content)
